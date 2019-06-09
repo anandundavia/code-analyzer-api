@@ -1,7 +1,7 @@
 const express = require('express');
 
 // import all the routes here
-const userRoutes = require('./user.route');
+const analyzeRoutes = require('./analyze.route');
 
 const router = express.Router();
 
@@ -17,6 +17,6 @@ router.get('/status', (req, res) => {
 	});
 });
 
-router.use('/user', userRoutes);
+router.use('/analyze', analyzeRoutes);
 
 module.exports = router;

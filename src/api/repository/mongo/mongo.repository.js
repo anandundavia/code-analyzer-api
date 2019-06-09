@@ -1,24 +1,25 @@
-const userCollection = require('./collection/user.collection');
+const mongoose = require('mongoose');
 
-// Holds the current connection to repository
-let db = null;
+const logger = require('../../utils/logger')(__filename);
+const { database } = require('../../../../src/constants');
 
-/**
- * Opens the connection to database and saves the connection in 'db' variable.
- * @returns {Promise} A promise that will be resolved to the database connection if successful
- */
-const connect = () =>
-	new Promise((resolve, reject) => {
-		// logic to open a connection to database
-		// once the connection is open, save the instance in db variable here
-	});
+// eslint-disable prettier/prettier
+// prettier-ignore
+const URI = `mongodb+srv://${database.username}:${database.password}@${database.host}/${database.name}?retryWrites=true`;
 
-// Asynchronously open the connection
-(async () => {
-	await connect();
-	userCollection.setDatabase(db);
-})();
+logger.debug('attempting to connect to MongoDB');
+mongoose.connect(URI, { useNewUrlParser: true, useCreateIndex: true });
 
+const { connection } = mongoose;
+connection.on('error', (e) => {
+	logger.error('failed to open connection to MongoDB');
+	logger.error(e);
+});
+connection.once('open', () => {
+	logger.info('successfully opened a connection to MongoDB');
+});
+
+/* eslint-disable global-require */
 module.exports = {
-	...userCollection.queries,
+	Report: require('./models/report.model'),
 };
