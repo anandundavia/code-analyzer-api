@@ -9,8 +9,8 @@ const options = {
 		const whiteList = [
 			'localhost',
 			'chrome-extension',
-			'https://code-analyzer-api.herokuapp.com',
-			'https://code-analyser-ui.firebaseapp.com',
+			'code-analyzer-api.herokuapp.com',
+			'code-analyser-ui.firebaseapp.com',
 		];
 		// We are doing string matching here.
 		// For advanced use-case, use regex
