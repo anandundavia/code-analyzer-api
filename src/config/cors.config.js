@@ -6,7 +6,12 @@ const APIError = require('../api/utils/APIError');
 const options = {
 	origin: (origin, callback) => {
 		// In dev, allow these origins to access the API
-		const whiteList = ['localhost', 'chrome-extension'];
+		const whiteList = [
+			'localhost',
+			'chrome-extension',
+			'https://code-analyzer-api.herokuapp.com',
+			'https://code-analyser-ui.firebaseapp.com',
+		];
 		// We are doing string matching here.
 		// For advanced use-case, use regex
 		const index = whiteList.findIndex((aWhiteListedOrigin) => origin.includes(aWhiteListedOrigin));
